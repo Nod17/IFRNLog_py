@@ -14,40 +14,43 @@ method = []
 code = []
 byte = []
 
-file = open(log_file_name, 'r')
-with open(csv_file_name, 'w') as out:
+
+try:
+    file = open(log_file_name, 'r')
+    with open(csv_file_name, 'w') as out:
 #-------------------- Host - IP -------------------------------------
-    for line in file:
-        host.append(line.split(' - - ')[0])
+        for line in file:
+            host.append(line.split(' - - ')[0])
 #-------------------- METHOD ----------------------------------------
-        method.append((line.split('"',1)[1]).split(' ',1)[0])
+            method.append((line.split('"',1)[1]).split(' ',1)[0])
 #-------------------- CODE ------------------------------------------
-        code.append((line.split('" ',1)[1]).split(' ',1)[0])
+            code.append((line.split('" ',1)[1]).split(' ',1)[0])
 #-------------------- BYTES -----------------------------------------
-        byte.append(((line.split('" ',1)[-1]).split(' "',3)[0]).split(' ',1)[-1])
+            byte.append(((line.split('" ',1)[-1]).split(' "',3)[0]).split(' ',1)[-1])
 #-------------------- HORARIO ---------------------------------------       
-        h = int(((line.split(':',1)[1])).split(':',1)[0])
-        if (h >= 6 and h < 12):
-            access.append('Manhã')
-        elif (h >= 12 and h < 18):
-            access.append('Tarde')
-        elif (h > 18 or h < 6):
-            access.append('Noite')
-        else:
-            access.append('erro')
+            h = int(((line.split(':',1)[1])).split(':',1)[0])
+            if (h >= 6 and h < 12):
+                access.append('Manhã')
+            elif (h >= 12 and h < 18):
+                access.append('Tarde')
+            elif (h > 18 or h < 6):
+                access.append('Noite')
+            else:
+                access.append('erro')
 #-------------------- SISTEMA OPERACIONAL ---------------------------                
-        if re.search(r'Windows\sNT', line):
-            os.append('Windows_NT')
-        elif re.findall(r'Linux\s', line):
-            os.append('Linux')
-        elif re.findall(r'Mac\sOS', line):
-            os.append('Mac_OS')
-        else:
-            os.append('Outro')
-#---------------------------------------------------------------------       
+            if re.search(r'Windows\sNT', line):
+                os.append('Windows_NT')
+            elif re.findall(r'Linux\s', line):
+                os.append('Linux')
+            elif re.findall(r'Mac\sOS', line):
+                os.append('Mac_OS')
+            else:
+                os.append('Outro')
+     
+except:
+    print('ERRO, ARQUIVO LOG NÃO ENCONTRADO')
 
-
-#-------------- OPÇÕES PARA VISUALIZAÇÃO DO DATAFRAME ----------------
+#---------- OPÇÕES PARA VISUALIZAÇÃO E CRIAÇÃO DO DATAFRAME ---------
 
 '''
 pd.set_option('display.max_columns', 20)  # or 1000
