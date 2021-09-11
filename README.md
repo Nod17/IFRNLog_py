@@ -1,4 +1,7 @@
 # IFRNLog_py
+Pequeno projeto IFRN (Rede de computadores)
+
+
 Analisar registros (logs) de auditoria de servidores e serviços de rede é uma atividade inerente ao profissional que atua na operação de serviços de TI.
 Essa análise, na maioria das vezes, é impossível de ser realizada com qualidade sem o auxílio de ferramentas (programas) feitos sob medida para filtrar
 e identificar anormalidades. É nesse contexto que o projeto LOG-PY se aplica, pois consiste em desenvolver uma ferramenta para LER, PROCESSAR e MOSTRAR
