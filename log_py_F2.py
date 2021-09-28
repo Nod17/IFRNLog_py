@@ -4,9 +4,11 @@ import re
 
 
 
-def processar(dic):
+def processar():
     log_file_name = "apache_logs.log"
     csv_file_name = "out.csv"
+    
+    dic = {'Host': [], 'Os': [],  'Method': [], 'Access': [], 'Code': [], 'Byte': []}
     
     try:
         file = open(log_file_name, 'r')
@@ -75,7 +77,9 @@ def processar(dic):
         os = df['Os'].value_counts() 
         df_os = pd.DataFrame(os)
         print(df_os)
-        df['Os'].value_counts().plot.pie(title = 'Participação dos sistemas operacionais')
+        
+        df_os.plot.pie(subplots=True, figsize=(10,5), autopct='%.2f', fontsize=10, labeldistance=None);
+        plt.show()
     
     def processar_mtd():
         
@@ -129,11 +133,11 @@ def processar(dic):
 
             if opção == 1:
                 processar_os()
-            if opção == 2:
+            elif opção == 2:
                 processar_mtd()
-            if opção == 3:
+            elif opção == 3:
                 processar_cd()
-            if opção == 4:
+            elif opção == 4:
                 processar_acc()
             elif opção == 5:
                 print("Saindo do programa...")
@@ -146,7 +150,7 @@ def processar(dic):
 
 #-------------------------------------------------------------------------------------
 def menu():
-    dic = {'Host': [], 'Os': [],  'Method': [], 'Access': [], 'Code': [], 'Byte': []}
+    
     
     while True:
         
@@ -156,13 +160,10 @@ def menu():
         opção = int(input("> "))
 
         if opção == 1:
-            processar(dic)
+            processar()
         elif opção == 2:
             print("Saindo do programa...")
             break
         else:
             print("Opção invalida!!!")
-
-
-
 menu()
